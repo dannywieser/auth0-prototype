@@ -1,0 +1,49 @@
+{
+  "name": "bb-auth-data-service",
+  "version": "0.0.1",
+  "description": "Blackboard Redux Data Service for Authentication",
+  "license": "UNLICENSED",
+  "files": [
+    "dist/**/*.js",
+    "dist/**/*.d.ts",
+    "README.md"
+  ],
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "publishConfig": {
+    "registry": "http://nexus.jxpola.jxpola.bb-dsg-sandbox.com/repository/npm-private/"
+  },
+  "scripts": {
+    "clean": "rimraf dist coverage yarn-error.log",
+    "start": "yarn clean && tsc -w",
+    "build": "yarn clean && tsc",
+    "test": "jest --coverage",
+    "demo": "webpack-dev-server --config demo/webpack.config.js",
+    "lint": "tslint --project \".\""
+  },
+  "dependencies": {
+    "@types/auth0-js": "^8.11.6",
+    "auth0-js": "^9.8.0",
+    "bb-js-data-service-util": "0.0.7"
+  },
+  "devDependencies": {
+    "@bb-js-style/tslint-config-bb-base": "^0.0.1",
+    "@types/jest": "^23.3.2",
+    "copy": "^0.3.2",
+    "css-loader": "^1.0.0",
+    "jest": "^23.6.0",
+    "json-loader": "^0.5.7",
+    "redux-service-demo": "1.1.17",
+    "rimraf": "^2.6.2",
+    "style-loader": "^0.23.0",
+    "ts-jest": "^23.1.4",
+    "ts-loader": "^5.1.1",
+    "tslint": "^5.11.0",
+    "typescript": "^3.0.3",
+    "url-search-params-polyfill": "^5.0.0",
+    "webpack": "^4.18.0",
+    "webpack-cli": "^3.1.0",
+    "webpack-dev-server": "^3.1.9",
+    "yaml-loader": "^0.5.0"
+  }
+}

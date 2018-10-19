@@ -1,0 +1,8 @@
+{
+  "name": "auth0-prototype",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:dannywieser/auth0-prototype.git",
+  "author": "dannywieser <danny.wieser@blackboard.com>",
+  "license": "MIT"
+}

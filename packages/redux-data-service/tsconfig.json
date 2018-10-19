@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "module": "es2015",
+    "baseUrl": ".",
+    "outDir": "dist",
+    "target": "es5",
+    "lib": ["es2017", "dom"],
+    "paths": {
+      "*": [ "src/*" ]
+    },
+    "typeRoots": [
+      "node_modules/@types",
+      "typings"
+    ],
+    "moduleResolution": "node",
+    "declaration": true,
+    "sourceMap": true,
+    "inlineSources": true,
+    "pretty": true,
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+  },
+  "include": [ "src" ]
+}

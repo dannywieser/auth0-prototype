@@ -1,0 +1,3 @@
+{
+  "extends": "@bb-js-style/tslint-config-bb-base"
+}

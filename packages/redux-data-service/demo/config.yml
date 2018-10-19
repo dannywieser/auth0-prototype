@@ -1,0 +1,8 @@
+auth0:
+  domain: 'dannywieser.auth0.com'
+  clientID: 'AVhYSKdxHLDlf7I6Kp9dtHQau2n2Jh9u'
+  redirectUri: 'http://localhost:8080'
+  responseType: 'token id_token'
+  scope: 'openid profile read:messages'
+  audience: 'http://localhost:3001/api'
+logoutUri: 'http://localhost:8080'
