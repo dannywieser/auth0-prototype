@@ -1,4 +1,5 @@
 import * as auth0 from 'auth0-js';
+import { doPost } from 'bb-js-data-service-util';
 import { config } from '../config';
 
 // constants
@@ -96,12 +97,51 @@ export const loadProfile = (accessToken: string) => {
     }
   });
 };
+function generateParams() {
+  const { redirectUri = '', clientID = '' } = config.auth0 || {};
+  const params = ['response_type=token'];
+  params.push(`redirect_uri=${redirectUri}`);
+  params.push(`client_id=${clientID}`);
+  //TODO: connection would be determined based on some logic in a service or via Auth0?
+  params.push(`connection=oktatest`);
+  return params.join('&');
+}
+export const login = (loginData: any) => {
+  const { domain = '' } = config.auth0 || {};
+  const params = generateParams();
+  const apiPath = `https://${domain}/authorize?${params}`;
+  window.location.replace(apiPath);
+}
 export const logout = () => {
   clearAuthData();
   auth.logout({ returnTo: config.logoutUri });
 };
 
+const passwordGrantPayload = (data: any) => {
+  const { access_token = '', id_token = '', expires_in = 0, scope = '' } = data;
+  const expiresAt = calcExpiry(expires_in);
+  const isAuthenticated = access_token != null;
+  const authData = {
+    scope,
+    expiresAt,
+    accessToken: access_token,
+    idToken: id_token,
+    expiresIn: expires_in,
+  };
+  return { isAuthenticated, authData };
+}
+
+export const passwordGrant = async (username: string, password: string) => {
+  const { domain = '', clientID = '', audience = '' } = config.auth0 || {};
+  const apiPath = `https://${domain}/oauth/token`;
+  const body = { username, password, audience, grant_type: 'password', client_id: clientID, scopes: 'openid profile' };
+  const { ok = false, data, status } = await doPost(apiPath, JSON.stringify(body));
+  const payload = ok ? passwordGrantPayload(data) : { ...data, status };
+  return { ok, payload };
+}
+
 export const authorize = (opts: any) => auth.authorize(opts);
+
 export const renew = () => {
   return new Promise((resolve) => {
     auth.checkSession({}, (err, authResult) => {

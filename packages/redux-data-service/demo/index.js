@@ -19,6 +19,7 @@ const services = {
     actions: auth.actions,
     forms: {
       authorize: [ 'opts' ],
+      passwordgrant: [ 'username', 'password' ],
     },
   },
 };

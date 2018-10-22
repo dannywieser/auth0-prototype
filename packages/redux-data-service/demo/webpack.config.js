@@ -12,7 +12,12 @@ const rules = [
   { test: /\.css$/, loader: 'style-loader!css-loader' },
   { test: /\.yml$/, loader: 'json-loader!yaml-loader' },
 ];
-const devServer = { contentBase: __dirname };
+const devServer = {
+  contentBase: __dirname,
+  historyApiFallback: {
+    index: 'index.html'
+  }
+};
 
 module.exports = () => ({
   module: { rules },

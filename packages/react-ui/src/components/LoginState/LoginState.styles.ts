@@ -2,8 +2,8 @@ import { css } from 'emotion';
 
 export const loginState = css({
   width: '100%',
+  height: '100%',
   border: '1px solid blue',
-  height: '40px',
   'line-height': '40px',
   'vertical-align': 'middle',
 });

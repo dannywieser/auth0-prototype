@@ -4,6 +4,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
 import { DefaultButton } from '@bb-ui-toolkit/toolkit-react/lib/Button';
+import * as styles from './Api.styles';
 
 interface IApiProps {
   accessToken: string
@@ -58,11 +59,16 @@ export class ApiTestBase extends React.Component<IApiAllProps> {
   render() {
     const { apiResult } = this.state;
     return (
-      <div>
+      <div className={styles.api}>
+        <h3>API access testing</h3>
+        <span>
+          <p>based on the current login state/access token, make API calls</p>
+        </span>
         <DefaultButton onClick={this.public}>Query Public API</DefaultButton>
         <DefaultButton onClick={this.messages}>Query Messages API</DefaultButton>
         <DefaultButton onClick={this.todos}>Query Todos API</DefaultButton>
-        <div>{apiResult}</div>
+        <hr/>
+        <div>RESULT: {apiResult}</div>
       </div>
     )
   }
