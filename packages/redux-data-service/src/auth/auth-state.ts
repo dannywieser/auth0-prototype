@@ -25,7 +25,8 @@ export enum types {
   configure = 'configure',
   loadauth = 'loadauth',
   parseauth = 'parseauth',
-  login = 'login',
+  silentauth = 'silentauth',
+  singleconnection = 'singleconnection',
   logout = 'logout',
   passwordgrant = 'passwordgrant',
   profile = 'profile',
@@ -60,9 +61,13 @@ const profile = () => (dispatch: Function, getState: Function) => {
   return dispatch(actionAsync(profileOpt, accessToken));
 };
 
-const login = (loginData: any) => {
-  service.login(loginData);
-  return actionSync(types.login, null);
+const silentauth = (connection: string) => {
+  service.silentAuth(connection);
+  return actionSync(types.silentauth, null);
+};
+const singleconnection = (connection: string) => {
+  service.singleConnection(connection);
+  return actionSync(types.silentauth, null);
 };
 const logout = () => {
   service.logout();
@@ -80,7 +85,18 @@ const passwordgrantOpt = {
 }
 const passwordgrant = (username: string, password: string) => actionAsync(passwordgrantOpt, username, password);
 
-export const actions: {[actionName: string]: Function} = { authorize, configure, loadauth, passwordgrant, parseauth, profile, login, logout, renew };
+export const actions: {[actionName: string]: Function} = {
+  authorize,
+  configure,
+  loadauth,
+  passwordgrant,
+  parseauth,
+  profile,
+  silentauth,
+  singleconnection,
+  logout,
+  renew,
+};
 
 // standard async actions, handled via bb-js-data-service-util helpers
 const asyncActions = [types.parseauth, types.profile, types.renew, types.passwordgrant];
@@ -108,8 +124,9 @@ export const reducerMap = {
   ...reducerAsyncActions(asyncActions),
   [types.authorize]: noChange,
   [types.configure]: handleConfigure,
-  [types.login]: noChange,
+  [types.silentauth]: noChange,
   [types.logout]: noChange,
+  [types.singleconnection]: noChange,
   [types.loadauth]: handleLoadAuth,
   [typeFail(types.parseauth)]: authFailure,
   [typeFail(types.renew)]: authFailure,

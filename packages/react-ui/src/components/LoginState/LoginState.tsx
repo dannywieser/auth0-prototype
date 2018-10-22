@@ -27,7 +27,7 @@ export class LoginStateBase extends React.Component<ILoginStateAllProps> {
       loadAuth();
     }
     if (profile == null) {
-      loadProfile();
+    //  loadProfile();
     }
   }
 

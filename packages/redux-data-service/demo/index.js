@@ -19,6 +19,8 @@ const services = {
     actions: auth.actions,
     forms: {
       authorize: [ 'opts' ],
+      silentauth: [ 'connection' ],
+      singleconnection: [ 'connection' ],
       passwordgrant: [ 'username', 'password' ],
     },
   },

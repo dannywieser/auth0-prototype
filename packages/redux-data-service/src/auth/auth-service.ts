@@ -97,18 +97,26 @@ export const loadProfile = (accessToken: string) => {
     }
   });
 };
-function generateParams() {
+function generateParams(connection: string, silent = false) {
   const { redirectUri = '', clientID = '' } = config.auth0 || {};
   const params = ['response_type=token'];
   params.push(`redirect_uri=${redirectUri}`);
   params.push(`client_id=${clientID}`);
-  //TODO: connection would be determined based on some logic in a service or via Auth0?
-  params.push(`connection=oktatest`);
+  params.push(`connection=${connection}`);
+  if (silent) {
+    params.push('prompt=none');
+  }
   return params.join('&');
 }
-export const login = (loginData: any) => {
+export const silentAuth = (connection: string) => {
   const { domain = '' } = config.auth0 || {};
-  const params = generateParams();
+  const params = generateParams(connection, true);
+  const apiPath = `https://${domain}/authorize?${params}`;
+  window.location.replace(apiPath);
+}
+export const singleConnection = (connection: string) => {
+  const { domain = '' } = config.auth0 || {};
+  const params = generateParams(connection);
   const apiPath = `https://${domain}/authorize?${params}`;
   window.location.replace(apiPath);
 }

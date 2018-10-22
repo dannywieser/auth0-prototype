@@ -1,6 +1,6 @@
 import { css } from 'emotion';
 
-export const api = css({
+export const silent = css({
   width: '95%',
   height: '100%',
   'margin-top': '20px',

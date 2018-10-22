@@ -1,11 +1,12 @@
 import { css } from 'emotion';
 
 export const loginState = css({
-  width: '100%',
+  width: '95%',
   height: '100%',
   border: '1px solid blue',
   'line-height': '40px',
   'vertical-align': 'middle',
+  padding: '10px',
 });
 
 export const authButton = css({

@@ -11,6 +11,7 @@ import { auth } from 'bb-auth-data-service';
 
 interface IAuthCallbackProps {
   isAuthenticated: boolean;
+  error: any;
 }
 
 interface IDispatchProps {
@@ -25,21 +26,22 @@ const AuthLoading = () => (<Spinner className={styles.centered} size={ SpinnerSi
 export class AuthCallbackBase extends React.Component<IAuthCallbackAllProps> {
   componentDidMount() {
     const { parseAuth } = this.props;
-    setTimeout(() => {
-      //fake wait to show callback step
-      parseAuth();
-    }, 6000);
+  //  setTimeout(() => {
+    parseAuth();
+  //  }, 6000);
   }
 
   render() {
-    const { isAuthenticated } = this.props;
-    return isAuthenticated ? <RedirectToHome/> : <AuthLoading />;
+    const { isAuthenticated, error } = this.props;
+    const hasError = error != null;
+    return isAuthenticated || hasError ? <RedirectToHome/> : <AuthLoading />;
   }
 }
 
 function mapStateToProps(state: any) {
   return {
-    isAuthenticated: state.auth.isAuthenticated
+    isAuthenticated: state.auth.isAuthenticated,
+    error: state.auth.api.error,
   };
 }
 
