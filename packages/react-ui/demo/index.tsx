@@ -5,7 +5,7 @@ import { auth, configure } from 'bb-auth-data-service';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { demoStore } from './demo-utils';
-import { LoginState, AuthCallback, ApiTest, EmbeddedLogin, SilentLogin } from '../src';
+import { LoginState, AuthCallback, ApiTest, EmbeddedLogin, SilentLogin, SingleConnection } from '../src';
 
 const config = {
   auth0: {
@@ -32,6 +32,7 @@ const DemoWrapper = (props: any) => {
           <Route path="/callback" component={AuthCallback} />
           <Route exact path="/" component={EmbeddedLogin} />
           <Route exact path="/" component={SilentLogin} />
+          <Route exact path="/" component={SingleConnection} />
           <Route exact path="/" component={ApiTest} />
         </div>
       </Provider>

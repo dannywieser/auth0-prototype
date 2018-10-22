@@ -14,8 +14,6 @@ export interface ISilentLoginProps {
 
 interface IDispatchProps {
   silentauth: Function;
-  profile: Function;
-  parseauth: Function;
 }
 
 export type ISilentLoginAllProps = ISilentLoginProps & IDispatchProps;
@@ -27,8 +25,9 @@ export class SilentLoginBase extends React.Component<ISilentLoginAllProps> {
 
   @autobind
   async login() {
+    const { connection } = this.state;
     const { silentauth } = this.props;
-    await silentauth('oktatest');
+    await silentauth(connection);
   }
 
   @autobind
